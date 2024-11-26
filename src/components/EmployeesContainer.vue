@@ -18,7 +18,7 @@
         class="border-b hover:bg-gray-100"
       >
         <td class="p-4">{{ employee.fullName }}</td>
-        <td class="p-4">{{ PositionLabel[employee.position] }}</td>
+        <td class="p-4">{{ PositionLabel[employee.position as keyof typeof PositionLabel] }}</td>
         <td class="p-4">{{ employee.isHead ? 'Head of Department' : 'Employee' }}</td>
         <td class="p-4">{{ DepartmentLabel[employee.departmentId] }}</td>
         <td v-if="canEdit" class="p-4">

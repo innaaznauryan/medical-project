@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="show">
+  <TransitionRoot as="template" :show="show" @after-leave="handleAfterLeave">
     <Dialog as="div" class="fixed inset-0 z-50 overflow-y-auto" @close="closeModal">
       <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <TransitionChild
@@ -61,9 +61,12 @@ defineProps({
     required: true
   }
 });
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'afterLeave']);
 
 const closeModal = () => {
   emit('close');
+}
+const handleAfterLeave = () => {
+  emit('afterLeave');
 }
 </script>

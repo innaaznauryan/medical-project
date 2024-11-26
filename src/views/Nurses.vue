@@ -12,21 +12,29 @@
     Add Nurse
   </button>
   <Modal
-    title="Add Nurse"
+    :title="title"
     :show="isModalOpen"
     @close="closeModal"
   >
     <EmployeeForm
+      v-if="selectedEmployee && isEditMode"
       :selected-employee="selectedEmployee"
+      :is-edit-mode="isEditMode"
+      @close="closeModal"
+      @submit-form="submitForm"
+    />
+    <EmployeeForm
+      v-else
       :is-edit-mode="isEditMode"
       @close="closeModal"
       @submit-form="submitForm"
     />
   </Modal>
   <Modal
-      :show="isDeleteModalOpen"
-      title="Are you sure you want to delete this Employee?"
-      @close="closeDeleteModal"
+    :show="isDeleteModalOpen"
+    title="Are you sure you want to delete this Employee?"
+    @close="closeDeleteModal"
+    @afterLeave="clearSelectedEmployee"
   >
     <ConfirmDelete
       v-if="selectedEmployee"
@@ -55,15 +63,15 @@ const isModalOpen = ref<boolean>(false);
 const isDeleteModalOpen = ref<boolean>(false);
 const selectedEmployee = ref<EmployeeSchema | null>(null);
 const isEditMode = ref<boolean>(false);
+const title = computed(() => isEditMode.value ? "Update Employee" : "Add Nurse");
 
 const openModal = () => {
   isModalOpen.value = true;
   isEditMode.value = false;
-  selectedEmployee.value = null;
 }
 const closeModal = () => {
   isModalOpen.value = false;
-  selectedEmployee.value = null;
+  clearSelectedEmployee();
 };
 const openEditModal = (employee: EmployeeSchema) => {
   selectedEmployee.value = employee;
@@ -76,6 +84,8 @@ const openDeleteModal = (employee: EmployeeSchema) => {
 };
 const closeDeleteModal = () => {
   isDeleteModalOpen.value = false;
+}
+const clearSelectedEmployee = () => {
   selectedEmployee.value = null;
 }
 

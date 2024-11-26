@@ -5,8 +5,19 @@ import { EmployeeSchema } from "../types/employee.ts";
 interface State {
     employees: EmployeeSchema[];
 }
+type MutationKeys = 'createEmployee' | 'updateEmployee' | 'deleteEmployee';
+type MutationPayloads = {
+    createEmployee: EmployeeSchema;
+    updateEmployee: EmployeeSchema;
+    deleteEmployee: number;
+};
+type Commit = <K extends MutationKeys>(
+    key: K,
+    payload: MutationPayloads[K]
+) => void;
 
-export const store = createStore<State>({
+
+export const store = createStore({
     state() {
         const storedEmployees = localStorage.getItem('employees');
         return {
@@ -30,13 +41,13 @@ export const store = createStore<State>({
         },
     },
     actions: {
-        createEmployee({ commit }, newEmployee: EmployeeSchema) {
+        createEmployee({ commit }: { commit: Commit }, newEmployee: EmployeeSchema) {
             commit('createEmployee', newEmployee);
         },
-        updateEmployee({ commit }, updatedEmployee: EmployeeSchema) {
+        updateEmployee({ commit }: { commit: Commit }, updatedEmployee: EmployeeSchema) {
             commit('updateEmployee', updatedEmployee);
         },
-        deleteEmployee({ commit }, employeeId: number) {
+        deleteEmployee({ commit }: { commit: Commit }, employeeId: number) {
             commit('deleteEmployee', employeeId);
         },
     },
