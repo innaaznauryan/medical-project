@@ -2,7 +2,7 @@
   <div v-if="selectedEmployee" class="mt-4 text-sm text-center text-gray-900">
     <p class="p-2"><strong>Name:</strong> {{ selectedEmployee.fullName }}</p>
     <p class="p-2"><strong>Position:</strong> {{ PositionLabel[selectedEmployee.position as keyof typeof PositionLabel] }}</p>
-    <p class="p-2"><strong>Department:</strong> {{ DepartmentLabel[selectedEmployee.departmentId] }}</p>
+    <p class="p-2 capitalize"><strong>Department:</strong> {{ DepartmentLabel[selectedEmployee.departmentId] }}</p>
   </div>
   <div class="mt-6 flex items-center justify-center gap-4">
     <button

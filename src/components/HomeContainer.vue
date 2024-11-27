@@ -3,7 +3,7 @@
     <li
       v-for="department in departments"
       :key="department.id"
-      class="p-4 text-dark font-semibold text-xl hover:text-primary duration-300"
+      class="p-4 text-dark font-semibold capitalize text-xl hover:text-primary duration-300"
     >
       <RouterLink :to="{ name: department.name }">
         {{ DepartmentLabel[department.id] }} Department

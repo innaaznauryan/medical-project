@@ -1,6 +1,6 @@
 <template>
   <p class="p-4" v-if="!employees.length">No Employees to show</p>
-  <div v-else class="overflow-x-auto bg-white shadow rounded-lg my-6">
+  <div v-else class="overflow-x-auto bg-white shadow rounded-lg mb-6">
     <table class="min-w-full table-auto text-left text-sm text-gray-600">
       <thead class="bg-primary text-white">
       <tr>
@@ -20,7 +20,11 @@
         <td class="p-4">{{ employee.fullName }}</td>
         <td class="p-4">{{ PositionLabel[employee.position as keyof typeof PositionLabel] }}</td>
         <td class="p-4">{{ employee.isHead ? 'Head of Department' : 'Employee' }}</td>
-        <td class="p-4">{{ DepartmentLabel[employee.departmentId] }}</td>
+        <td class="p-4 capitalize">
+          <RouterLink :to="{ name: DepartmentLabel[employee.departmentId] }">
+            {{ DepartmentLabel[employee.departmentId] }}
+          </RouterLink>
+        </td>
         <td v-if="canEdit" class="p-4">
           <button
               class="mx-2 my-1 text-primary"

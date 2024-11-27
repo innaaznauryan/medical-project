@@ -39,7 +39,7 @@
                 id="departmentId"
                 name="departmentId"
                 required
-                class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-inset focus:ring-dark focus-visible:outline-none sm:text-sm">
+                class="block w-full rounded-md border-0 p-2 text-gray-900 capitalize shadow-sm ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-inset focus:ring-dark focus-visible:outline-none sm:text-sm">
                 <option disabled :value="null">Select a department</option>
                 <option
                   v-for="department in departments"

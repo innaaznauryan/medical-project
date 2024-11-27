@@ -4,6 +4,6 @@ export enum Department {
 }
 
 export const DepartmentLabel: Record<number, string> = {
-    [Department.cardiology]: 'Cardiology',
-    [Department.surgical]: 'Surgical',
+    [Department.cardiology]: 'cardiology',
+    [Department.surgical]: 'surgical',
 };
